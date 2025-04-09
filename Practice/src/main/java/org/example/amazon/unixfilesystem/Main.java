@@ -24,7 +24,7 @@ public class Main {
         filters.put("ExtensionFilter", "java");
         filters.put("SizeFilter", new Object[]{10, ">="});
 
-        Search search = new Search(root, filters, "OR");
+        Search search = new Search(root, filters, "AND");
         List<String> result = search.findFiles();
 
         for (String fileName : result) {
