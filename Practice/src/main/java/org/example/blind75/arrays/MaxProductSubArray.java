@@ -2,32 +2,48 @@ package org.example.blind75.arrays;
 
 public class MaxProductSubArray {
     public static int maxProduct(int[] nums) {
-        int n = nums.length;
-        int max = Integer.MIN_VALUE;
-        int product = 1;
-
-        // Traverse from left to right
-        for (int i = 0; i < n; i++) {
-            product *= nums[i];
-            max = Math.max(max, product);
-            if (nums[i] == 0) product = 1; // Reset on zero
+        int res = nums[0];
+        int currMin =1;
+        int currMax = 1;
+        for(int n: nums){
+            if( n == 0) {
+                currMax=1;
+                currMin=1;
+            }
+            int temp = n *currMax;
+            currMax = Math.max(Math.max(n*currMax, n*currMin), n);
+            currMin = Math.min(Math.min(temp, n*currMin), n);
+            res = Math.max(res, currMax);
         }
-/*
-To handle cases like {0,2} and {3,-1,4} it is important to traverse from right to left to find the max value
- */
-        // Reset product and traverse from right to left
-        product = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            product *= nums[i];
-            max = Math.max(max, product);
-            if (nums[i] == 0) product = 1; // Reset on zero
-        }
+        return res;
+    }
 
-        return max;
+    /*
+    to find the lenght of such prob is also similar
+     */
+    public static int maxProductLength(int[] nums){
+        int res=0;
+        int posLen = 0;
+        int negLen =0;
+        for(int n: nums){
+            if(n == 0){
+                posLen=0;
+                negLen=0;
+            } else if (n > 0) {
+                posLen +=1;
+                negLen = negLen> 0 ? negLen+1:0;
+            }else {
+                int temp = posLen;
+                posLen = negLen> 0 ? negLen+1:0;
+                negLen = temp+1;
+            }
+            res = Math.max(res, posLen);
+        }
+        return res;
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{2, 3, -2, 4};
+        int[] arr = new int[]{1,-2,-3,4};
         System.out.println(maxProduct(arr));
     }
 }
