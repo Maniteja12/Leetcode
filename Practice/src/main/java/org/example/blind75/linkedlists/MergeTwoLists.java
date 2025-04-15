@@ -1,8 +1,5 @@
 package org.example.blind75.linkedlists;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
 public class MergeTwoLists {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode dummy = new ListNode();

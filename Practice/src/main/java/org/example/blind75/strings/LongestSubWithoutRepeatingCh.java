@@ -29,28 +29,6 @@ public class LongestSubWithoutRepeatingCh {
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
-    class Solution {
-        public ListNode mergeKLists(ListNode[] lists) {
-            if(lists.length == 0)
-                System.out.println("[]");
-            PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparing(a->a.val));
-            for(ListNode l :lists){
-                if(l!= null){
-                    pq.add(l);
-                }
-            }
-            ListNode dummy = new ListNode(-1);
-            ListNode temp = dummy;
-            while(!pq.isEmpty()){
-                ListNode min = pq.poll();
-                temp.next = min;
-                temp = temp.next;
-                if(min.next!= null)
-                   pq.add(min.next);
-            }
-        return dummy.next;
-        }
-    }
     public int trap(int[] height){
             int lmax =0, rmax =0, total=0, l=0, r = height.length-1;
             while(l<r){

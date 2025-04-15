@@ -6,21 +6,22 @@ import java.util.PriorityQueue;
 public class MergeKSortedLists {
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists.length == 0)
-            System.out.println("[]");
-        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparing(a->a.val));
-        for(ListNode l :lists){
+            return null;
+        PriorityQueue<ListNode> pq = new PriorityQueue<>(Comparator.comparing(a -> a.val));
+        for(ListNode l : lists){
             if(l!= null){
-                pq.add(l);
+                pq.offer(l);
             }
         }
         ListNode dummy = new ListNode(-1);
         ListNode temp = dummy;
         while(!pq.isEmpty()){
-            ListNode min = pq.poll();
-            temp.next = min;
+            ListNode curr = pq.poll();
+            temp.next = curr;
             temp = temp.next;
-            if(min.next!= null)
-                pq.add(min.next);
+            if(curr.next!= null){
+                pq.add(curr.next);
+            }
         }
         return dummy.next;
     }
